@@ -16,4 +16,9 @@ defmodule SampleApp.StaticPageViewTest do
     actual = renderTemplate("help.html")
     assert Regex.match?(~r/help/, actual)
   end
+
+  test "renders about.html" do
+    actual = renderTemplate("about.html")
+    assert Regex.match?(~r/About Us/, actual)
+  end
 end
