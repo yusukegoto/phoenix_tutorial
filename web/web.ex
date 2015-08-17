@@ -43,6 +43,7 @@ defmodule SampleApp.Web do
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
+      alias Phoenix.HTML.Link
 
       import SampleApp.Router.Helpers
     end

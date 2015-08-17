@@ -1,0 +1,12 @@
+<footer class="footer">
+  <small>
+    <a href="http://www.phoenixframework.org/">Phoenix Tutorial</a>
+  </small>
+  <nav>
+    <ul>
+      <li><%= link "About",   to: about_path(@conn, :about) %></li>
+      <li><%= link "Contact", to: "#" %></li>
+      <li><a href="http://news.railstutorial.jp/">News</a></li>
+    </ul>
+  </nav>
+</footer>
