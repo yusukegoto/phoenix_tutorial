@@ -12,20 +12,27 @@
   </head>
 
   <body>
-    <div class="container" role="main">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-        </ul>
-        <span class="logo"></span>
+    <header class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+          <a href="#" id="logo">sample app</a>
+          <nav>
+            <ul class="nav nav-pills pull-right">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Help</a></li>
+              <li><a href="#">Sign in</a></li>
+            </ul>
+          </nav>
+        </div>
       </div>
-
+    </header>
+    <div class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
       <%= @inner %>
+    </div>
 
-    </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
