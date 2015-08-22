@@ -7,7 +7,7 @@
     sample application.
   </h2>
 
-  <a href="#" class="btn btn-large btn-primary">Sign up now!"</a>
+  <%= link "Sign up now!", to: "/users/new" %>
 </div>
 
 <a href="http://www.phoenixframework.org/">
