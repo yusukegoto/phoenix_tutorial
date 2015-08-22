@@ -9,7 +9,7 @@ defmodule SampleApp.StaticPageViewTest do
 
   test "renders home.html" do
     actual = renderTemplate("home.html")
-    assert Regex.match?(~r/home sweet/, actual)
+    assert Regex.match?(~r/This is the home page for the/, actual)
   end
 
   test "renders help.html" do

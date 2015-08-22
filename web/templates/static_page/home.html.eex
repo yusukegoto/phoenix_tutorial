@@ -11,5 +11,5 @@
 </div>
 
 <a href="http://www.phoenixframework.org/">
-  <img src="<%= static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix">
+  <img src="/images/phoenix.png" alt="Phoenix">
 </a>
