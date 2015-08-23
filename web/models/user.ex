@@ -32,11 +32,7 @@ defmodule SampleApp.User do
   end
 
   defp downcase_email(changeset) do
-    email = Changeset.get_field(changeset, :email)
-
-    if email do
-      change(changeset, %{email: String.downcase(email)})
-    end
+    Changeset.update_change(changeset, :email, &String.downcase/1)
   end
 
   defp validate_password(changeset) do
@@ -48,11 +44,13 @@ defmodule SampleApp.User do
   end
 
   defp set_password_degit(changeset) do
-    if has_password?(changeset) do
-      changeset
+    password = Changeset.get_field changeset, :password
+
+    if password do
+      password_digest = Bcrypt.hashpwsalt password
+      Changeset.put_change changeset, :password_digest, password_digest
     else
-      password = Changeset.get_field(changeset, :password)
-      change(changeset, %{password_digest: Bcrypt.hashpwsalt(password)})
+      changeset
     end
   end
 
