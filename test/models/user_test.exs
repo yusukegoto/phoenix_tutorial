@@ -36,4 +36,14 @@ defmodule SampleApp.UserTest do
 
     assert expected =~ ~r/パスワードを確認/
   end
+
+  test "authenticate ok" do
+    user = Repo.insert! User.changeset(%User{}, @valid_attrs)
+    assert User.authenticate(user, "password")
+  end
+
+  test "authenticate ng" do
+    user = Repo.insert! User.changeset(%User{}, @valid_attrs)
+    refute User.authenticate(user, "")
+  end
 end

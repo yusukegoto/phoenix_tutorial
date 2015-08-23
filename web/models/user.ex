@@ -27,6 +27,10 @@ defmodule SampleApp.User do
     |> validate_password
   end
 
+  def authenticate(model, password) do
+    Bcrypt.checkpw(password, model.password_digest)
+  end
+
   defp downcase_email(changeset) do
     email = Changeset.get_field(changeset, :email)
 
