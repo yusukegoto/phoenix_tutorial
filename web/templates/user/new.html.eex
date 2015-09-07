@@ -1,20 +1,23 @@
 <h1>Sign up</h1>
 
-<div class="col-md-6 offset3">
-  <%= form_for @changeset, user_path(@conn, :create), fn f -> %>
+<div class="row">
+  <div class="col-md-6 offset3">
+    <%= form_for @changeset, user_path(@conn, :create), fn f -> %>
+      <%= render SampleApp.SharedView, "error_messages.html", errors: f.errors %>
 
-    <%= label f, :name %>
-    <%= text_input f, :name, class: "form-control" %>
+      <%= label f, :name %>
+      <%= text_input f, :name, class: "form-control" %>
 
-    <%= label f, :email %>
-    <%= text_input f, :email, class: "form-control" %>
+      <%= label f, :email %>
+      <%= text_input f, :email, class: "form-control" %>
 
-    <%= label f, :password %>
-    <%= password_input f, :password, class: "form-control" %>
+      <%= label f, :password %>
+      <%= password_input f, :password, class: "form-control" %>
 
-    <%= label f, :password_confirmation %>
-    <%= password_input f, :password_confirmation, class: "form-control" %>
+      <%= label f, :password_confirmation %>
+      <%= password_input f, :password_confirmation, class: "form-control" %>
 
-    <%= submit "Create my account", class: "btn btn-large btn-primary" %>
-  <% end %>
+      <%= submit "Create my account", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
 </div>

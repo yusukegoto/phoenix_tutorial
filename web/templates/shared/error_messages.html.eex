@@ -1,0 +1,3 @@
+<%= for {attr, message} <- @errors do %>
+  <p><%= "#{attr}:#{message}" %></p>
+<% end %>
