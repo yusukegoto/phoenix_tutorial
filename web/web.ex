@@ -33,6 +33,7 @@ defmodule SampleApp.Web do
       import Ecto.Query, only: [from: 1, from: 2]
 
       import SampleApp.Router.Helpers
+      require IEx
     end
   end
 

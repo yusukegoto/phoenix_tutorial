@@ -4,6 +4,7 @@ defmodule SampleApp.User do
 
   before_insert :downcase_email
   before_insert :set_password_degit
+  before_insert :create_remember_token
 
   schema "users" do
     field :name,  :string
@@ -11,6 +12,7 @@ defmodule SampleApp.User do
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
     field :password_digest, :string
+    field :remember_token,  :string
 
     timestamps
   end
@@ -59,5 +61,24 @@ defmodule SampleApp.User do
     password_c = Changeset.get_field(changeset, :password_confirmation)
 
     (password || password_c) && (password != password_c)
+  end
+
+  def new_remember_token do
+    token = SecureRandom.urlsafe_base64
+
+    if SampleApp.Repo.get_by(__MODULE__, remember_token: token) do
+      new_remember_token
+    else
+      token
+    end
+  end
+
+  def encrypt(token) do
+    # sha1が面倒だったのでmd5で代用
+    Base.encode16 token, case: :lower
+  end
+
+  defp create_remember_token(changeset) do
+    Changeset.put_change changeset, :remember_token, encrypt(new_remember_token)
   end
 end

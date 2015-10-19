@@ -1,9 +1,11 @@
 <div class="row">
   <aside class="col-md-4">
     <section>
-      <div class="alert alert-success" role="alert">
-        <%= get_flash @conn, :notice %>
-      </div>
+      <%= if notice = get_flash(@conn, :notice) do %>
+        <div class="alert alert-success" role="alert">
+          <%= notice %>
+        </div>
+      <% end %>
       <h1>
         <%= gravator_for(@user.email) %>
         <%= @user.name %>

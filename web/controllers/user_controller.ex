@@ -1,6 +1,7 @@
 defmodule SampleApp.UserController do
   use SampleApp.Web, :controller
   alias SampleApp.User
+  plug SampleApp.Plugs.Signin
 
   def new(conn, _params) do
     changeset = User.changeset %User{}
@@ -9,7 +10,7 @@ defmodule SampleApp.UserController do
 
   # mapのキーは文字列でくる
   def show(conn, %{"id" => id}) do
-    user = Repo.get!(User, id)
+    user = conn.assigns[:current_user]
 
     render conn, "show.html", user: user, title: user.name
   end
@@ -20,7 +21,6 @@ defmodule SampleApp.UserController do
     case Repo.insert(changeset) do
       {:ok, user} ->
         conn
-        # |> redirect to: user_path(conn, :index)
         |> put_flash(:notice, "success!!")
         |> redirect(to: user_path(conn, :show, user))
       {:error, changeset} ->

@@ -27,6 +27,9 @@ defmodule SampleApp.UserTest do
 
     assert Comeonin.Bcrypt.checkpw("password", expected.password_digest)
     assert "test@test.com" == expected.email
+
+    refute to_string(expected.remember_token) == ""
+    refute is_nil(expected.remember_token)
   end
 
   test "invalid before insert" do
