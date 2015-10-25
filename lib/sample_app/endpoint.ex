@@ -30,6 +30,7 @@ defmodule SampleApp.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
 
+  # TODO: 有効期限
   plug Plug.Session,
     store: :cookie,
     key: "_sample_app_key",

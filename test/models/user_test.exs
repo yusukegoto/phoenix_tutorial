@@ -7,8 +7,9 @@ defmodule SampleApp.UserTest do
                     email: "TEST@test.com",
                     password: "password",
                     password_confirmation: "password"}
-  @invalid_attrs %{ emal: "error",
-                    password: "" }
+  @invalid_attrs %{ email: "error",
+                    password: "a",
+                    password_confirmation: "b" }
 
   test "changeset with valid attributes" do
     changeset = User.changeset(%User{}, @valid_attrs)
@@ -35,9 +36,9 @@ defmodule SampleApp.UserTest do
   test "invalid before insert" do
     changeset = User.changeset %User{}, @invalid_attrs
     {:error, changeset} = Repo.insert(changeset)
-    expected = Dict.get changeset.errors, :password
+    expected = changeset.errors[:password]
 
-    assert expected =~ ~r/パスワードを確認/
+    assert Regex.match?(~r/パスワード/, expected)
   end
 
   test "authenticate ok" do
@@ -48,5 +49,18 @@ defmodule SampleApp.UserTest do
   test "authenticate ng" do
     user = Repo.insert! User.changeset(%User{}, @valid_attrs)
     refute User.authenticate(user, "")
+  end
+
+  test "token update" do
+    changeset = User.changeset %User{}, @valid_attrs
+    {:ok, user} = Repo.insert changeset
+    old_token = user.remember_token
+
+    new_token = User.new_remember_token |> User.encrypt
+    new_changeset = User.changeset4token(user, %{remember_token: new_token})
+    {:ok, expected} = Repo.update new_changeset
+
+    refute expected.remember_token == old_token
+    assert expected.remember_token == new_token
   end
 end

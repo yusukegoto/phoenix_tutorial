@@ -20,7 +20,10 @@ defmodule SampleApp.Web do
     quote do
       use Ecto.Model
       use Ecto.Model.Callbacks
+      import Ecto.Query
       alias Ecto.Changeset
+      alias SampleApp.Repo
+      if Mix.env() in [:dev, :test], do: require IEx
     end
   end
 
@@ -33,7 +36,7 @@ defmodule SampleApp.Web do
       import Ecto.Query, only: [from: 1, from: 2]
 
       import SampleApp.Router.Helpers
-      require IEx
+      if Mix.env() in [:dev, :test], do: require IEx
     end
   end
 
@@ -49,6 +52,8 @@ defmodule SampleApp.Web do
       alias Phoenix.HTML.Link
 
       import SampleApp.Router.Helpers
+      alias SampleApp.Repo
+      if Mix.env() in [:dev, :test], do: require IEx
     end
   end
 
