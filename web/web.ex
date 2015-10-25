@@ -36,6 +36,7 @@ defmodule SampleApp.Web do
       import Ecto.Query, only: [from: 1, from: 2]
 
       import SampleApp.Router.Helpers
+      import SampleApp.CurrentUser
       require IEx
     end
   end
@@ -60,6 +61,7 @@ defmodule SampleApp.Web do
   def router do
     quote do
       use Phoenix.Router
+      import SampleApp.CurrentUser
     end
   end
 

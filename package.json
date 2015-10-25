@@ -8,5 +8,8 @@
     "javascript-brunch": ">= 1.0 < 1.8",
     "less-brunch": "^1.8.1",
     "uglify-js-brunch": ">= 1.0 < 1.8"
+  },
+  "devDependencies": {
+    "bower": "^1.6.5"
   }
 }

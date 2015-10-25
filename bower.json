@@ -1,0 +1,21 @@
+{
+  "name": "sample_app",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Yusuke Goto <u.suke.goto@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/yusukegoto/phoenix_tutorial",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "3.1.1"
+  }
+}

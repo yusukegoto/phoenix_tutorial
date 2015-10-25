@@ -41,7 +41,6 @@ defmodule SampleApp.SessionController do
 
     conn
     |> put_session(:remember_token, new_remember_token)
-    |> assign(:current_user, user)
   end
 
   defp sign_out(conn) do

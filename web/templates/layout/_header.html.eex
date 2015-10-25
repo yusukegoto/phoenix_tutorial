@@ -6,7 +6,23 @@
         <ul class="nav nav-pills pull-right">
           <li><%= link "Home", to: home_path(@conn, :home) %></li>
           <li><%= link "Help", to: help_path(@conn, :help) %></li>
-          <li><%= link_to_session_action @conn %></li>
+          <%= if signed_in?(@conn) do %>
+            <li><%= link "Users", to: "#" %></li>
+            <li id="fat-menu" class="dropdown">
+              <a id="dLabel" href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                Account <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dLabel">
+                <% current_user = current_user(@conn) %>
+                <li><%= link "profile",  to: user_path(@conn, :show, current_user)%></li>
+                <li><%= link "Settings", to: user_path(@conn, :edit, current_user)%></li>
+                <li class="divider"></li>
+                <li><%= link "Sigin out", to: signout_path(@conn, :destroy), method: :delete %></li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%= link "Sigin in",  to: signin_path(@conn, :new) %></li>
+          <% end %>
         </ul>
       </nav>
     </div>

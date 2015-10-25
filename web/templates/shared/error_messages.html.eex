@@ -1,3 +1,10 @@
-<%= for {attr, message} <- @errors do %>
-  <p><%= "#{attr}:#{message}" %></p>
+<%= unless Enum.empty?(@errors) do %>
+  <div class="alert alert-danger" role="alert">
+    <%= "#{length(@errors)}箇所のエラーを見直してください" %>
+  </div>
+  <ul>
+    <%= for {attr, message} <- @errors do %>
+       <li class="text-danger"><%= "#{attr}:#{message}" %></li>
+    <% end %>
+  </ul>
 <% end %>

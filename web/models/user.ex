@@ -23,7 +23,7 @@ defmodule SampleApp.User do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
-    |> validate_length(:name,  max: 50)
+    |> validate_length(:name,  min: 1, max: 50)
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/)
     |> validate_confirmation(:password, message: "入力されたパスワードが一致しません")
