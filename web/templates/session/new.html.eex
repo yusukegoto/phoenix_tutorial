@@ -1,0 +1,24 @@
+<h1>Sign in</h1>
+
+<div class="row">
+  <div class="col-md-6 offset3">
+    <%= form_for @conn, session_path(@conn, :create), [name: :login_params], fn f -> %>
+
+      <ul>
+        <%= for {attr, message} <- f.errors do %>
+          <li><%= humanize(attr) %> <%= message %></li>
+        <% end %>
+      </ul>
+
+      <%= label f, :email, "email" %>
+      <%= text_input f, :email %>
+
+      <%= label f, :password, "password" %>
+      <%= password_input f, :password %>
+
+      <%= submit "Sign in", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+    <p>New user? <%= link "Sign up now!", to: signup_path(@conn, :new) %></p>
+  </div>
+</div>
