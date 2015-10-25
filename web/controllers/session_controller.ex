@@ -40,13 +40,12 @@ defmodule SampleApp.SessionController do
     {:ok, _} = Repo.update(changeset)
 
     conn
-    # |> put_resp_cookie("remember_token", new_remember_token, max_age: @permanent)
     |> put_session(:remember_token, new_remember_token)
     |> assign(:current_user, user)
   end
 
   defp sign_out(conn) do
     conn
-    |> delete_resp_cookie("remember_token")
+    |> put_session(:remember_token, nil)
   end
 end
