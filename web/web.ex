@@ -23,7 +23,7 @@ defmodule SampleApp.Web do
       import Ecto.Query
       alias Ecto.Changeset
       alias SampleApp.Repo
-      if Mix.env() in [:dev, :test], do: require IEx
+      require IEx
     end
   end
 
@@ -36,7 +36,7 @@ defmodule SampleApp.Web do
       import Ecto.Query, only: [from: 1, from: 2]
 
       import SampleApp.Router.Helpers
-      if Mix.env() in [:dev, :test], do: require IEx
+      require IEx
     end
   end
 
@@ -53,7 +53,7 @@ defmodule SampleApp.Web do
 
       import SampleApp.Router.Helpers
       alias SampleApp.Repo
-      if Mix.env() in [:dev, :test], do: require IEx
+      require IEx
     end
   end
 
