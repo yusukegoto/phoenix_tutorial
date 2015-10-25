@@ -1,5 +1,11 @@
 # SampleApp
 
+[![Build Status](https://travis-ci.org/yusukegoto/phoenix_tutorial.svg?branch=master)](https://travis-ci.org/yusukegoto/phoenix_tutorial)
+
+This Repo is
+
+This practice is based on [Rails Tutorial](http://railstutorial.jp/).
+
 To start your Phoenix app:
 
   1. Install dependencies with `mix deps.get`
