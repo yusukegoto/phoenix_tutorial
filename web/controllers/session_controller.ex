@@ -15,7 +15,7 @@ defmodule SampleApp.SessionController do
       conn
       |> sign_in(user)
       |> put_flash(:notice, "#{user.name}さんようこそ")
-      |> redirect(to: user_path(conn, :show, user))
+      |> redirect_back_or(user_path(conn, :show, user))
     else
       conn
       |> put_flash(:error, "Invarid email/password combination")
@@ -46,5 +46,12 @@ defmodule SampleApp.SessionController do
   defp sign_out(conn) do
     conn
     |> put_session(:remember_token, nil)
+  end
+
+  defp redirect_back_or(conn, default) do
+    url = get_session(conn, :return_to) || default
+    conn
+    |> put_session(:return_to, nil)
+    |> redirect(to: url)
   end
 end

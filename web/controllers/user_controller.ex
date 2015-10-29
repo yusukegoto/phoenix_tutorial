@@ -61,11 +61,17 @@ defmodule SampleApp.UserController do
     case current_user(conn) do
       nil ->
         conn
+        |> store_session()
         |> put_flash(:warning, "ログインが必要です")
         |> redirect(to: signin_path(conn, :new))
+        |> halt
       _user ->
         conn
     end
+  end
+
+  defp store_session(conn) do
+    put_session(conn, :return_to, conn.request_path)
   end
 
   # plug
@@ -73,6 +79,6 @@ defmodule SampleApp.UserController do
     user = Repo.get User, conn.params["id"]
     if user && current_user(conn) == user,
       do:   conn,
-      else: redirect(conn, to: home_path(conn, :home))
+      else: redirect(conn, to: home_path(conn, :home)) |> halt
   end
 end
