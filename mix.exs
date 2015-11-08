@@ -36,6 +36,7 @@ defmodule SampleApp.Mixfile do
      {:phoenix_live_reload, "~> 0.6", only: :dev},
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 1.1"},
-     {:secure_random, "~> 0.1"}]
+     {:secure_random, "~> 0.1"},
+     {:faker, "~> 0.5", only: :dev}]
   end
 end
