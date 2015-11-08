@@ -3,29 +3,28 @@ defmodule Mix.Tasks.Ecto.SampleData do
 
   @shortdoc "Fill database with sample data"
 
+  # args has special meaning
   def run(args) do
     Faker.start
-    repo = parse_repo args
-    {:ok, pid} = ensure_started repo
 
-    last_count = users_count
+    open_repo(args) do
+      last_count = users_count
 
-    for _ <- 0..10 do
-      {name, email} = faker
-      password = "password"
-      changeset = User.changeset %User{}, %{
-        name: name,
-        email: email,
-        password: password,
-        password_confirmation: password }
+      for _ <- 0..10 do
+        {name, email} = faker
+        password = "password"
+        changeset = User.changeset %User{}, %{
+          name: name,
+          email: email,
+          password: password,
+          password_confirmation: password }
 
-      {:ok, user} = Repo.insert changeset
-      IO.inspect("#{user.id}: #{user.name}")
+        {:ok, user} = Repo.insert changeset
+        IO.inspect("#{user.id}: #{user.name}")
+      end
+
+      Mix.shell.info "count: #{users_count - last_count}"
     end
-
-    Mix.shell.info "count: #{users_count - last_count}"
-
-    pid && ensure_stopped(pid)
   end
 
   defp users_count do
