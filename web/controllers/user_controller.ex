@@ -2,8 +2,13 @@ defmodule SampleApp.UserController do
   use SampleApp.Web, :controller
   alias SampleApp.User
 
-  plug :signined_in?  when action in [:edit, :update]
+  plug :signined_in?  when action in [:index, :edit, :update]
   plug :correct_user? when action in [:edit, :update]
+
+  def index(conn, _params) do
+    users = Repo.all User
+    render conn, "index.html", title: "All users", users: users
+  end
 
   def new(conn, _params) do
     changeset = User.changeset %User{}

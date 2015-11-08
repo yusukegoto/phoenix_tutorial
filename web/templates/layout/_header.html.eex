@@ -7,7 +7,7 @@
           <li><%= link "Home", to: home_path(@conn, :home) %></li>
           <li><%= link "Help", to: help_path(@conn, :help) %></li>
           <%= if signed_in?(@conn) do %>
-            <li><%= link "Users", to: "#" %></li>
+            <li><%= link "Users", to: user_path(@conn, :index) %></li>
             <li id="fat-menu" class="dropdown">
               <a id="dLabel" href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 Account <b class="caret"></b>
