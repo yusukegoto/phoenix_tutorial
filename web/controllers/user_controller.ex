@@ -5,9 +5,22 @@ defmodule SampleApp.UserController do
   plug :signined_in?  when action in [:index, :edit, :update]
   plug :correct_user? when action in [:edit, :update]
 
-  def index(conn, _params) do
-    users = Repo.all User
-    render conn, "index.html", title: "All users", users: users
+  def index(conn, params) do
+    per_page = 10
+    page = Map.get(params, "page", "1") |> String.to_integer
+
+    offset = (page - 1) * per_page
+    total_count = User
+                  |> select([u], count(u.id))
+                  |> Repo.one
+    total_page = (total_count / per_page) |> Float.ceil |> round
+    page_info = %{"current_page" => page, "total_page" => total_page, "total_count" => total_count}
+
+    q = User
+        |> limit([u],  ^per_page)
+        |> offset([u], ^offset)
+    users = Repo.all q
+    render conn, "index.html", title: "All users", users: users, page_info: page_info
   end
 
   def new(conn, _params) do

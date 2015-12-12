@@ -1,5 +1,7 @@
 <h1>All users</h1>
 
+<%= paginate(@conn, @page_info) %>
+
 <ul class="users">
   <%= for user <- @users do %>
     <li>
@@ -8,3 +10,5 @@
     </li>
   <% end %>
 </ul>
+
+<%= paginate(@conn, @page_info) %>

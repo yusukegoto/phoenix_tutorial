@@ -33,7 +33,7 @@ defmodule SampleApp.Web do
 
       alias SampleApp.Repo
       import Ecto.Model
-      import Ecto.Query, only: [from: 1, from: 2]
+      import Ecto.Query
 
       import SampleApp.Router.Helpers
       import SampleApp.CurrentUser
