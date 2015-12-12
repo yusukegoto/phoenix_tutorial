@@ -6,20 +6,11 @@ defmodule SampleApp.UserController do
   plug :correct_user? when action in [:edit, :update]
 
   def index(conn, params) do
-    per_page = 10
     page = Map.get(params, "page", "1") |> String.to_integer
 
-    offset = (page - 1) * per_page
-    total_count = User
-                  |> select([u], count(u.id))
-                  |> Repo.one
-    total_page = (total_count / per_page) |> Float.ceil |> round
-    page_info = %{"current_page" => page, "total_page" => total_page, "total_count" => total_count}
+    page_info = Pager.new(User, %{page: page, per_page: 10})
 
-    q = User
-        |> limit([u],  ^per_page)
-        |> offset([u], ^offset)
-    users = Repo.all q
+    users = Repo.all page_info.entries
     render conn, "index.html", title: "All users", users: users, page_info: page_info
   end
 

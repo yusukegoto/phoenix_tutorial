@@ -37,6 +37,7 @@ defmodule SampleApp.Web do
 
       import SampleApp.Router.Helpers
       import SampleApp.CurrentUser
+      alias SampleApp.Paging.Pager
       require IEx
     end
   end
@@ -54,6 +55,7 @@ defmodule SampleApp.Web do
 
       import SampleApp.Router.Helpers
       alias SampleApp.Repo
+      import SampleApp.Paging.HTML
       require IEx
     end
   end
