@@ -1,16 +1,26 @@
 <div class="row">
-  <aside class="col-md-4">
-    <section>
-      <%= if notice = get_flash(@conn, :notice) do %>
-        <div class="alert alert-success" role="alert">
-          <%= notice %>
-        </div>
+  <div class="col-md-4">
+    <aside>
+      <section>
+        <%= if notice = get_flash(@conn, :notice) do %>
+          <div class="alert alert-success" role="alert">
+            <%= notice %>
+          </div>
+        <% end %>
+        <h1>
+          <%= gravator_for(@user.email) %>
+        </h1>
+        <%= @user.name %>
+        <%= @user.email %>
+      </section>
+    </aside>
+  </div>
+  <div class="col-md-8">
+    <h3>Microposts(<%= length(@user.micro_posts) %>)</h3>
+    <ol class="micro_posts">
+      <%= for post <- @user.micro_posts do %>
+        <li><%= post.content %></li>
       <% end %>
-      <h1>
-        <%= gravator_for(@user.email) %>
-      </h1>
-      <%= @user.name %>
-      <%= @user.email %>
-    </section>
-  </aside>
+    </ol>
+  </div>
 </div>

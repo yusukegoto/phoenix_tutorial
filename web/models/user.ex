@@ -13,6 +13,7 @@ defmodule SampleApp.User do
     field :password, :string, virtual: true
     field :password_digest, :string
     field :remember_token,  :string
+    has_many :micro_posts, SampleApp.MicroPost, on_delete: :fetch_and_delete
 
     timestamps
   end

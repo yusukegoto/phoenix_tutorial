@@ -63,4 +63,26 @@ defmodule SampleApp.UserTest do
     refute expected.remember_token == old_token
     assert expected.remember_token == new_token
   end
+
+  test "has many micro_posts" do
+    changeset = User.changeset(%User{}, @valid_attrs)
+    {:ok, user} = Repo.insert(changeset)
+
+    post = Ecto.Model.build(user, :micro_posts, content: "test")
+    Repo.insert! post
+
+    posts = user
+            |> Repo.preload(:micro_posts)
+            |> Map.get(:micro_posts)
+
+    assert length(posts) == 1
+
+    Repo.delete! user
+
+    posts = Ecto.Query.from(mp in SampleApp.MicroPost,
+              where: mp.user_id == ^user.id)
+            |> Repo.all
+    refute Repo.get(User, user.id)
+    assert length(posts) == 0
+  end
 end

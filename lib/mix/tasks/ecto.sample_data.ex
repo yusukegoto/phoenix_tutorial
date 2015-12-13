@@ -20,6 +20,18 @@ defmodule Mix.Tasks.Ecto.SampleData do
           password_confirmation: password }
 
         {:ok, user} = Repo.insert changeset
+        timestamp = :calendar.local_time
+                    |> Tuple.to_list
+                    |> Enum.map(&Tuple.to_list/1)
+                    |> List.flatten
+                    |> Enum.join("")
+        1..3
+        |> Enum.map fn _ ->
+          user
+          |> Ecto.Model.build(:micro_posts, content: "test #{timestamp}")
+          |> Repo.insert!
+        end
+
         IO.inspect("#{user.id}: #{user.name}")
       end
 

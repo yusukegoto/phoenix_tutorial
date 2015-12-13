@@ -47,8 +47,12 @@ defmodule SampleApp.UserController do
 
   # mapのキーは文字列でくる
   def show(conn, %{"id" => id}) do
-    user = Repo.get User, id
-
+    user = from(u in User,
+             preload: [:micro_posts],
+             where: u.id == ^id,
+             limit: 1
+           )
+           |> Repo.one
     conn
     |> render("show.html", user: user, title: user.name)
   end
