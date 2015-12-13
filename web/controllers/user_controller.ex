@@ -103,6 +103,6 @@ defmodule SampleApp.UserController do
   defp admin?(conn, _) do
     if current_user(conn).admin,
       do:   conn,
-      else: redirect conn, to: signin_path(conn, :new)
+      else: redirect(conn, to: signin_path(conn, :new))
   end
 end
