@@ -9,6 +9,7 @@ defmodule SampleApp.User do
   schema "users" do
     field :name,  :string
     field :email, :string
+    field :admin, :boolean
     field :password, :string, virtual: true
     field :password_digest, :string
     field :remember_token,  :string

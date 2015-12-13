@@ -4,10 +4,7 @@
 
 <ul class="users">
   <%= for user <- @users do %>
-    <li>
-      <%= gravator_for(user.email) %>
-      <%= link user.name, to: user_path(@conn, :show, user) %>
-    </li>
+      <%= render SampleApp.UserView, "_user.html", conn: @conn, user: user %>
   <% end %>
 </ul>
 

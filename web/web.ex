@@ -57,6 +57,15 @@ defmodule SampleApp.Web do
       alias SampleApp.Repo
       import SampleApp.Paging.HTML
       require IEx
+
+      # TODO: module
+      def current_user(conn) do
+        conn.assigns[:current_user]
+      end
+
+      def current_user?(conn, user) do
+        current_user(conn) == user
+      end
     end
   end
 

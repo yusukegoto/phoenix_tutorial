@@ -14,8 +14,4 @@ defmodule SampleApp.LayoutView do
   def signed_in?(conn) do
     !!current_user(conn)
   end
-
-  def current_user(conn) do
-    conn.assigns[:current_user]
-  end
 end

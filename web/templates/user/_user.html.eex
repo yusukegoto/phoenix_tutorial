@@ -1,0 +1,9 @@
+  <li>
+    <%= gravator_for(@user.email) %>
+    <%= link @user.name, to: user_path(@conn, :show, @user) %>
+    <%= if current_user(@conn).admin do %>
+      |
+      <%= link "delete", to: user_path(@conn, :delete, @user), method: :delete %>
+    <% end %>
+  </li>
+

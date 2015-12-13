@@ -4,6 +4,7 @@ defmodule SampleApp.UserController do
 
   plug :signined_in?  when action in [:index, :edit, :update]
   plug :correct_user? when action in [:edit, :update]
+  plug :admin? when action in [:delete]
 
   def index(conn, params) do
     page = Map.get(params, "page", "1") |> String.to_integer
@@ -65,6 +66,14 @@ defmodule SampleApp.UserController do
     end
   end
 
+  def delete(conn, params) do
+    User
+    |> Repo.get!(params["id"])
+    |> Repo.delete!
+
+    redirect conn, to: user_path(conn, :index)
+  end
+
   # plug
   defp signined_in?(conn, _) do
     case current_user(conn) do
@@ -89,5 +98,11 @@ defmodule SampleApp.UserController do
     if user && current_user(conn) == user,
       do:   conn,
       else: redirect(conn, to: home_path(conn, :home)) |> halt
+  end
+
+  defp admin?(conn, _) do
+    if current_user(conn).admin,
+      do:   conn,
+      else: redirect conn, to: signin_path(conn, :new)
   end
 end

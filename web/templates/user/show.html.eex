@@ -8,8 +8,9 @@
       <% end %>
       <h1>
         <%= gravator_for(@user.email) %>
-        <%= @user.name %>
       </h1>
+      <%= @user.name %>
+      <%= @user.email %>
     </section>
   </aside>
 </div>
