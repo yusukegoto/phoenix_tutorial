@@ -1,6 +1,7 @@
 defmodule SampleApp.CurrentUser do
   alias SampleApp.Repo
   alias SampleApp.User
+  require Ecto.Query
 
   # plug
   def assign_current_user(conn, _) do
@@ -13,6 +14,9 @@ defmodule SampleApp.CurrentUser do
                      |> Plug.Conn.get_session(:remember_token)
                      |> to_string
                      |> User.encrypt
-    Repo.get_by(User, remember_token: remember_token)
+    Ecto.Query.from(u in User,
+      preload: [:micro_posts],
+      where: u.remember_token == ^remember_token)
+    |> Repo.one
   end
 end

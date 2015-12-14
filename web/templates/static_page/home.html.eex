@@ -1,15 +1,32 @@
-<div class="center hero-unit">
-  <h1>Welcome to the Sample App</h1>
+<%= if SampleApp.LayoutView.signed_in?(@conn) do %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section>
+        <%= render SharedView, "_user_info.html", conn: @conn, user: current_user(@conn) %>
+      </section>
+      <section>
+        <%= render SharedView, "_micro_post_form.html", conn: @conn, changeset: @changeset %>
+      </section>
+    </aside>
+    <div class="col-md-8">
+      <h3>Micropost Feed</h3>
+      <%= render SharedView, "_feed.html", conn: @conn, feed_items: @feed_items %>
+    </div>
+  </div>
+<% else %>
+  <div class="center hero-unit">
+    <h1>Welcome to the Sample App</h1>
 
-  <h2>
-    This is the home page for the
-    <a href="http://railstutorial.jp/">Phoenix Tutorial</a>
-    sample application.
-  </h2>
+    <h2>
+      This is the home page for the
+      <a href="http://railstutorial.jp/">Phoenix Tutorial</a>
+      sample application.
+    </h2>
 
-  <%= link "Sign up now!", to: "/users/new" %>
-</div>
+    <%= link "Sign up now!", to: "/users/new" %>
+  </div>
 
-<a href="http://www.phoenixframework.org/">
-  <img src="/images/phoenix.png" alt="Phoenix">
-</a>
+  <a href="http://www.phoenixframework.org/">
+    <img src="/images/phoenix.png" alt="Phoenix">
+  </a>
+<% end %>

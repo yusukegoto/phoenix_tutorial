@@ -1,0 +1,12 @@
+<a href="<%= user_path(@conn, :show, @user) %>">
+  <%= SampleApp.UserView.gravator_for @user.email %>
+</a>
+<h1>
+  <%= @user.name %>
+</h1>
+<span>
+  <%= link "view my profile", to: user_path(@conn, :show, @user) %>
+</span>
+<span>
+  <%= SampleApp.Pluralize.pluralize length(@user.micro_posts), "micropost" %>
+</span>

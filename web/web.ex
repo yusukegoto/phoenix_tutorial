@@ -39,6 +39,24 @@ defmodule SampleApp.Web do
       import SampleApp.CurrentUser
       alias SampleApp.Paging.Pager
       require IEx
+
+      defp store_session(conn) do
+        put_session(conn, :return_to, conn.request_path)
+      end
+
+      # plug
+      defp signined_in?(conn, _) do
+        case current_user(conn) do
+          nil ->
+            conn
+            |> store_session()
+            |> put_flash(:warning, "ログインが必要です")
+            |> redirect(to: signin_path(conn, :new))
+            |> halt
+          _user ->
+            conn
+        end
+      end
     end
   end
 
@@ -64,7 +82,7 @@ defmodule SampleApp.Web do
       end
 
       def current_user?(conn, user) do
-        current_user(conn) == user
+        current_user(conn).id == user.id
       end
     end
   end

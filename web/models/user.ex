@@ -1,6 +1,7 @@
 defmodule SampleApp.User do
   use SampleApp.Web, :model
   alias Comeonin.Bcrypt
+  alias SampleApp.MicroPost
 
   before_insert :downcase_email
   before_insert :set_password_degit
@@ -64,6 +65,13 @@ defmodule SampleApp.User do
     else
       token
     end
+  end
+
+  def feed(user) do
+    Ecto.Query.from(mp in MicroPost,
+      preload: [:user],
+      where: mp.user_id == ^user.id)
+    |> Repo.all
   end
 
   def encrypt(token) do

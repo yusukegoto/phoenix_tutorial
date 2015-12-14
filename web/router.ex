@@ -23,6 +23,7 @@ defmodule SampleApp.Router do
     get "/about", StaticPageController, :about, as: :about
 
     resources "/users", UserController
+    resources "/micro_posts", MicroPostController, only: [:index, :create, :delete]
     resources "/sessions", SessionController, only: [:new, :create, :destroy]
 
     get    "/signup",   UserController,    :new,     as: :signup

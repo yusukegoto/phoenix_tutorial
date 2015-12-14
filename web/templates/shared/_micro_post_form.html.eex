@@ -1,0 +1,7 @@
+<%= form_for @changeset, micro_post_path(@conn, :create), fn f -> %>
+  <%= render SampleApp.SharedView, "error_messages.html", errors: f.errors %>
+  <div class="field">
+    <%= textarea f, :content, placeholder: "Compose new micropost..." %>
+  </div>
+  <%= submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>

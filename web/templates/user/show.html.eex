@@ -19,7 +19,12 @@
     <h3>Microposts(<%= length(@user.micro_posts) %>)</h3>
     <ol class="micro_posts">
       <%= for post <- @user.micro_posts do %>
-        <li><%= post.content %></li>
+        <li>
+          <%= post.content %>
+          <%= if current_user?(@conn, @user) do %>
+            <%= link "delete", to: micro_post_path(@conn, :delete, post), method: :delete, title: post.content, data: [confirm: "You sure?"] %>
+          <% end %>
+        </li>
       <% end %>
     </ol>
   </div>

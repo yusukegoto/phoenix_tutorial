@@ -1,0 +1,5 @@
+<%= if Enum.any? @feed_items do %>
+  <ol class="micro_posts">
+    <%= @feed_items |> Enum.map(fn post -> render SampleApp.SharedView, "_feed_item.html", conn: @conn, feed_item: post end)%>
+  </ol>
+<% end %>

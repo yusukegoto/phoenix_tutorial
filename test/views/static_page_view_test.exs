@@ -4,7 +4,7 @@ defmodule SampleApp.StaticPageViewTest do
   import Phoenix.View
 
   defp renderTemplate(action) do
-    render_to_string(SampleApp.StaticPageView, action, %{})
+    render_to_string(SampleApp.StaticPageView, action, conn: conn)
   end
 
   test "renders home.html" do

@@ -37,6 +37,7 @@ defmodule SampleApp.Mixfile do
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 1.1"},
      {:secure_random, "~> 0.1"},
-     {:faker, "~> 0.5", only: :dev}]
+     {:faker, "~> 0.5", only: :dev},
+     {:inflex, "~> 1.5.0"}]
   end
 end

@@ -79,24 +79,6 @@ defmodule SampleApp.UserController do
   end
 
   # plug
-  defp signined_in?(conn, _) do
-    case current_user(conn) do
-      nil ->
-        conn
-        |> store_session()
-        |> put_flash(:warning, "ログインが必要です")
-        |> redirect(to: signin_path(conn, :new))
-        |> halt
-      _user ->
-        conn
-    end
-  end
-
-  defp store_session(conn) do
-    put_session(conn, :return_to, conn.request_path)
-  end
-
-  # plug
   defp correct_user?(conn, _) do
     user = Repo.get User, conn.params["id"]
     if user && current_user(conn) == user,

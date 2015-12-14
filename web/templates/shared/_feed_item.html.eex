@@ -1,0 +1,13 @@
+<li id="<%= @feed_item.id %>">
+  <%= link SampleApp.UserView.gravator_for(@feed_item.user.email), to: user_path(@conn, :show, @feed_item.user) %>
+  <span class="user">
+    <%= link @feed_item.user.name, to: user_path(@conn, :show, @feed_item.user) %>
+  </span>
+  <span class="content"><%= @feed_item.content %></span>
+  <span class="timestamp">
+    Posted  ago.
+  </span>
+  <%= if current_user?(@conn, @feed_item.user) do %>
+    <%= link "delete", to: micro_post_path(@conn, :delete, @feed_item), method: :delete, title: @feed_item.content, data: [confirm: "You sure?"] %>
+  <% end %>
+</li>
